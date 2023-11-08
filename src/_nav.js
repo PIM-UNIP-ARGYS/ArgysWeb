@@ -1,18 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import {
-  cilBell,
-  cilCalculator,
-  cilChartPie,
-  cilCursor,
-  cilDescription,
-  cilDrop,
-  cilNotes,
-  cilPencil,
-  cilPuzzle,
-  cilSpeedometer,
-  cilStar,
-} from '@coreui/icons'
+import { cilSettings, cilSpeedometer, cilSpreadsheet, cilUser } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
@@ -30,7 +18,7 @@ const _nav = [
     component: CNavGroup,
     name: 'Trabalhador',
     to: '/trabalhador',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
@@ -58,19 +46,81 @@ const _nav = [
     component: CNavGroup,
     name: 'Tabelas',
     to: '/tabelas',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [],
+    icon: <CIcon icon={cilSpreadsheet} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Banco',
+        to: '/tabelas/banco',
+      },
+      {
+        component: CNavItem,
+        name: 'Agência',
+        to: '/tabelas/agencia',
+      },
+      {
+        component: CNavItem,
+        name: 'Cargo',
+        to: '/tabelas/cargo',
+      },
+      {
+        component: CNavItem,
+        name: 'CBO',
+        to: '/tabelas/cbo',
+      },
+      {
+        component: CNavItem,
+        name: 'Feriado',
+        to: '/tabelas/feriado',
+      },
+      {
+        component: CNavItem,
+        name: 'Plano de Saúde',
+        to: '/tabelas/plano_saude',
+      },
+      {
+        component: CNavItem,
+        name: 'Valor e Imposto',
+        to: '/tabelas/valor_imposto',
+      },
+      {
+        component: CNavItem,
+        name: 'Valor e Imposto - PLR',
+        to: '/tabelas/valor_imposto_plr',
+      },
+    ],
   },
   {
     component: CNavGroup,
     name: 'Configurações',
     to: '/configuracoes',
-    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
-    items: [],
+    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Empresa',
+        to: '/configuracoes/empresa',
+      },
+    ],
   },
   {
     component: CNavTitle,
     name: 'Processos',
+  },
+  {
+    component: CNavItem,
+    name: 'Calcular Folha de Pagamento',
+    to: '/processos/calcular_fp',
+  },
+  {
+    component: CNavItem,
+    name: 'Consultar cálculos',
+    to: '/processos/consulta_fp',
+  },
+  {
+    component: CNavItem,
+    name: 'Histórico de Cálculos',
+    to: '/processos/historico_fp',
   },
 ]
 
