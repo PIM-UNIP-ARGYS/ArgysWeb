@@ -3,7 +3,6 @@ import {
   CButton,
   CCard,
   CCardBody,
-  CCardGroup,
   CCardHeader,
   CCol,
   CContainer,
@@ -56,7 +55,10 @@ const PersonalData = () => {
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
+                    <CTableDataCell>
+                      <button>E</button>
+                      <button>D</button>
+                    </CTableDataCell>
                   </CTableRow>
                 </CTableBody>
               </CTable>
