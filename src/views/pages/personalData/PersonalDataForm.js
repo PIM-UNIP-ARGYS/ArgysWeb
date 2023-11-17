@@ -41,7 +41,7 @@ const PersonalDataForm = () => {
               </CForm>
             </CCardBody>
           </CCard>
-          <CCard className="p-1">
+          <CCard className="p-1 mb-3">
             <CAccordion>
               <CAccordionItem>
                 <CAccordionHeader>Dados Principais</CAccordionHeader>
@@ -307,6 +307,50 @@ const PersonalDataForm = () => {
                         <div className="mb-2 col-3">
                           <CFormLabel htmlFor="nContaInput">Validade do Visto</CFormLabel>
                           <CFormInput id="nContaInput" placeholder="__/__/____" />
+                        </div>
+                      </CAccordionBody>
+                    </CAccordionItem>
+                  </CAccordion>
+                </CAccordionBody>
+              </CAccordionItem>
+            </CAccordion>
+          </CCard>
+          <CCard className="p-1">
+            <CAccordion>
+              <CAccordionItem>
+                <CAccordionHeader>Dados Complementares</CAccordionHeader>
+                <CAccordionBody>
+                  <CAccordion className="p-1">
+                    <CAccordionItem>
+                      <CAccordionHeader>Endereço</CAccordionHeader>
+                      <CAccordionBody className="row">
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">CEP</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="CEP" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">UF</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="UF" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">Cidade</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Cidade" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">Bairro</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Bairro" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">Logradouro</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Logradouro" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">Número</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Número" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="nContaInput">Complemento</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Complemento" />
                         </div>
                       </CAccordionBody>
                     </CAccordionItem>
