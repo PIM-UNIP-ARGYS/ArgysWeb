@@ -6,8 +6,6 @@ import {
   CAccordionItem,
   CCard,
   CCardBody,
-  CCardHeader,
-  CCardTitle,
   CCol,
   CContainer,
   CForm,
