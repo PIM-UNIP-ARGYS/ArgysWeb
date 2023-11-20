@@ -313,7 +313,7 @@ const PersonalDataForm = () => {
               </CAccordionItem>
             </CAccordion>
           </CCard>
-          <CCard className="p-1">
+          <CCard className="p-1 mb-3">
             <CAccordion>
               <CAccordionItem>
                 <CAccordionHeader>Dados Complementares</CAccordionHeader>
@@ -349,6 +349,65 @@ const PersonalDataForm = () => {
                         <div className="mb-2 col-3">
                           <CFormLabel htmlFor="nContaInput">Complemento</CFormLabel>
                           <CFormInput id="nContaInput" placeholder="Complemento" />
+                        </div>
+                        <div className="mb-2 col-3">
+                          <CFormLabel htmlFor="tipoInput">Tipo do Endereço</CFormLabel>
+                          <CFormSelect
+                            id="tipoInput"
+                            className="mb-2"
+                            aria-label="Selecione o Tipo do Endereço"
+                          >
+                            <option></option>
+                            <option value="1">Principal</option>
+                            <option value="2">Residencial</option>
+                            <option value="3">Cobrança</option>
+                            <option value="3">Comercial</option>
+                          </CFormSelect>
+                        </div>
+                      </CAccordionBody>
+                    </CAccordionItem>
+                  </CAccordion>
+                  <CAccordion className="p-1">
+                    <CAccordionItem>
+                      <CAccordionHeader>Telefone</CAccordionHeader>
+                      <CAccordionBody className="row">
+                        <div className="mb-2 col-4">
+                          <CFormLabel htmlFor="nContaInput">Contato</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Contato" />
+                        </div>
+                        <div className="mb-2 col-4">
+                          <CFormLabel htmlFor="nContaInput">Telefone</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Telefone" />
+                        </div>
+                        <div className="mb-2 col-4">
+                          <CFormLabel htmlFor="tipoInput">Tipo</CFormLabel>
+                          <CFormSelect
+                            id="tipoInput"
+                            className="mb-2"
+                            aria-label="Selecione o Tipo do Endereço"
+                          >
+                            <option></option>
+                            <option value="1">Principal</option>
+                            <option value="2">Celular</option>
+                            <option value="3">Residencial</option>
+                            <option value="3">Comercial</option>
+                            <option value="3">Fax</option>
+                          </CFormSelect>
+                        </div>
+                      </CAccordionBody>
+                    </CAccordionItem>
+                  </CAccordion>
+                  <CAccordion className="p-1">
+                    <CAccordionItem>
+                      <CAccordionHeader>Email</CAccordionHeader>
+                      <CAccordionBody className="row">
+                        <div className="mb-2 col-6">
+                          <CFormLabel htmlFor="nContaInput">Contato</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Contato" />
+                        </div>
+                        <div className="mb-2 col-6">
+                          <CFormLabel htmlFor="nContaInput">Email</CFormLabel>
+                          <CFormInput id="nContaInput" placeholder="Telefone" />
                         </div>
                       </CAccordionBody>
                     </CAccordionItem>
