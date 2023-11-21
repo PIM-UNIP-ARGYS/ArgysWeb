@@ -8,6 +8,8 @@ const BondDataForm = React.lazy(() => import('./views/pages/bondData/BondDataFor
 const VacationData = React.lazy(() => import('./views/pages/vacationData/VacationData'))
 const JobData = React.lazy(() => import('./views/pages/jobData/JobData'))
 const JobDataForm = React.lazy(() => import('./views/pages/jobData/JobDataForm'))
+const CboData = React.lazy(() => import('./views/pages/cboData/CboData'))
+const CboDataForm = React.lazy(() => import('./views/pages/cboData/CboDataForm'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -43,6 +45,15 @@ const routes = [
   {
     path: '/tabelas/cargo/create',
     element: JobDataForm,
+  },
+  {
+    path: '/tabelas/cbo',
+    name: 'Tabelas / CBO',
+    element: CboData,
+  },
+  {
+    path: '/tabelas/cbo/create',
+    element: CboDataForm,
   },
 ]
 
