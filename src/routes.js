@@ -10,6 +10,12 @@ const JobData = React.lazy(() => import('./views/pages/jobData/JobData'))
 const JobDataForm = React.lazy(() => import('./views/pages/jobData/JobDataForm'))
 const CboData = React.lazy(() => import('./views/pages/cboData/CboData'))
 const CboDataForm = React.lazy(() => import('./views/pages/cboData/CboDataForm'))
+const HealthInsuranceData = React.lazy(() =>
+  import('./views/pages/healthInsuranceData/HealthInsuranceData'),
+)
+const HealthInsuranceDataForm = React.lazy(() =>
+  import('./views/pages/healthInsuranceData/HealthInsuranceDataForm'),
+)
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -54,6 +60,15 @@ const routes = [
   {
     path: '/tabelas/cbo/create',
     element: CboDataForm,
+  },
+  {
+    path: '/tabelas/plano_saude',
+    name: 'Tabelas / Plano de Sáude',
+    element: HealthInsuranceData,
+  },
+  {
+    path: '/tabelas/plano_saude/create',
+    element: HealthInsuranceDataForm,
   },
 ]
 

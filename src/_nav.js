@@ -58,29 +58,6 @@ const _nav = [
         name: 'Plano de Saúde',
         to: '/tabelas/plano_saude',
       },
-      {
-        component: CNavItem,
-        name: 'Valor e Imposto',
-        to: '/tabelas/valor_imposto',
-      },
-      {
-        component: CNavItem,
-        name: 'Valor e Imposto - PLR',
-        to: '/tabelas/valor_imposto_plr',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Configurações',
-    to: '/configuracoes',
-    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Empresa',
-        to: '/configuracoes/empresa',
-      },
     ],
   },
   {
