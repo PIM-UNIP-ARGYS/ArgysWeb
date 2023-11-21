@@ -34,22 +34,16 @@ const BondData = () => {
               <CTable responsive bordered>
                 <CTableHead>
                   <CTableRow>
-                    <CTableHeaderCell scope="col">Código</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Nome</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">RG</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Nº Carteira Trab.</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Matrícula</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Trabalhador</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Categoria</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Data de admissão</CTableHeaderCell>
                     <CTableHeaderCell scope="col">CPF</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">PIS</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Titulo de Eleitor</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Data de Nascimento</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
                   <CTableRow>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>
                     <CTableDataCell>Cell</CTableDataCell>

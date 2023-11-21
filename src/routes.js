@@ -3,6 +3,8 @@ import React from 'react'
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const PersonalData = React.lazy(() => import('./views/pages/personalData/PersonalData'))
 const PersonalDataForm = React.lazy(() => import('./views/pages/personalData/PersonalDataForm'))
+const BondData = React.lazy(() => import('./views/pages/bondData/BondData'))
+const BondDataForm = React.lazy(() => import('./views/pages/bondData/BondDataForm'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -15,6 +17,15 @@ const routes = [
   {
     path: '/trabalhador/dados_pessoais/create',
     element: PersonalDataForm,
+  },
+  {
+    path: '/trabalhador/vinculo',
+    name: 'Trabalhador / Vínculo',
+    element: BondData,
+  },
+  {
+    path: '/trabalhador/vinculo/create',
+    element: BondDataForm,
   },
 ]
 
