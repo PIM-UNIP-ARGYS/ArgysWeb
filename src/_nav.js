@@ -1,6 +1,6 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
-import { cilSettings, cilSpeedometer, cilSpreadsheet, cilUser } from '@coreui/icons'
+import { cilSpeedometer, cilSpreadsheet, cilUser } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
@@ -68,11 +68,6 @@ const _nav = [
     component: CNavItem,
     name: 'Calcular Folha de Pagamento',
     to: '/processos/calcular_fp',
-  },
-  {
-    component: CNavItem,
-    name: 'Consultar cálculos',
-    to: '/processos/consulta_fp',
   },
   {
     component: CNavItem,

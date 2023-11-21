@@ -16,6 +16,8 @@ const HealthInsuranceData = React.lazy(() =>
 const HealthInsuranceDataForm = React.lazy(() =>
   import('./views/pages/healthInsuranceData/HealthInsuranceDataForm'),
 )
+const CalculatePayroll = React.lazy(() => import('./views/pages/calculatePayroll/CalculatePayroll'))
+const HistoryPayroll = React.lazy(() => import('./views/pages/historyPayroll/HistoryPayroll'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -69,6 +71,16 @@ const routes = [
   {
     path: '/tabelas/plano_saude/create',
     element: HealthInsuranceDataForm,
+  },
+  {
+    path: '/processos/calcular_fp',
+    name: 'Calcular Folha de Pagamento',
+    element: CalculatePayroll,
+  },
+  {
+    path: '/processos/historico_fp',
+    name: 'Histórico de Cálculos',
+    element: HistoryPayroll,
   },
 ]
 
