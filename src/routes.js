@@ -6,6 +6,8 @@ const PersonalDataForm = React.lazy(() => import('./views/pages/personalData/Per
 const BondData = React.lazy(() => import('./views/pages/bondData/BondData'))
 const BondDataForm = React.lazy(() => import('./views/pages/bondData/BondDataForm'))
 const VacationData = React.lazy(() => import('./views/pages/vacationData/VacationData'))
+const JobData = React.lazy(() => import('./views/pages/jobData/JobData'))
+const JobDataForm = React.lazy(() => import('./views/pages/jobData/JobDataForm'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -32,6 +34,15 @@ const routes = [
     path: '/trabalhador/ferias',
     name: 'Trabalhador / Ferias',
     element: VacationData,
+  },
+  {
+    path: '/tabelas/cargo',
+    name: 'Tabelas / Cargo',
+    element: JobData,
+  },
+  {
+    path: '/tabelas/cargo/create',
+    element: JobDataForm,
   },
 ]
 
