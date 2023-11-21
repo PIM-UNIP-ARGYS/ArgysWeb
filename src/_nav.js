@@ -35,11 +35,6 @@ const _nav = [
         name: 'Férias',
         to: '/trabalhador/ferias',
       },
-      {
-        component: CNavItem,
-        name: 'Quadro de Horário',
-        to: '/trabalhador/quadro_horario',
-      },
     ],
   },
   {
@@ -50,16 +45,6 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'Banco',
-        to: '/tabelas/banco',
-      },
-      {
-        component: CNavItem,
-        name: 'Agência',
-        to: '/tabelas/agencia',
-      },
-      {
-        component: CNavItem,
         name: 'Cargo',
         to: '/tabelas/cargo',
       },
@@ -67,11 +52,6 @@ const _nav = [
         component: CNavItem,
         name: 'CBO',
         to: '/tabelas/cbo',
-      },
-      {
-        component: CNavItem,
-        name: 'Feriado',
-        to: '/tabelas/feriado',
       },
       {
         component: CNavItem,
