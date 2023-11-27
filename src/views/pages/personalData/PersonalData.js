@@ -22,6 +22,8 @@ const PersonalData = () => {
     window.location.href = '#/trabalhador/dados_pessoais/create'
   }
 
+  const handleGetPersonalDataList = () => {}
+
   return (
     <CContainer>
       <CRow>
