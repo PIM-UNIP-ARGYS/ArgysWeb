@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -16,8 +16,24 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import logo from '../../../assets/images/logo.png'
+import axios from '../../../services/axios.service'
 
 const Login = () => {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  const loginApp = async () => {
+    const data = {
+      email: email,
+      senha: password,
+    }
+
+    const result = await axios.post('auth', data)
+
+    if (result.status === 200) {
+      window.location.href = '#/dashboard'
+    }
+  }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -33,7 +49,11 @@ const Login = () => {
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
-                      <CFormInput placeholder="E-mail" autoComplete="email" />
+                      <CFormInput
+                        placeholder="E-mail"
+                        autoComplete="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
@@ -43,14 +63,12 @@ const Login = () => {
                         type="password"
                         placeholder="Senha"
                         autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </CInputGroup>
-                    <CButton color="primary" className="w-100">
+                    <CButton color="primary" className="w-100" onClick={loginApp}>
                       Login
                     </CButton>
-                    <div className="text-center mt-2">
-                      <Link to="/reset-password">Recuperar Senha?</Link>
-                    </div>
                   </CForm>
                 </CCardBody>
               </CCard>
