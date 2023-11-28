@@ -31,7 +31,7 @@ const Login = () => {
     const result = await axios.post('auth', data)
 
     if (result.status === 200) {
-      window.location.href = '#/dashboard'
+      window.location.href = '#/home'
     }
   }
   return (

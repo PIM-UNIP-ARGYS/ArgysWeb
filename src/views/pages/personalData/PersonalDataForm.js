@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   CAccordion,
   CAccordionBody,
@@ -18,14 +18,135 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import axios from '../../../services/axios.service'
 
 const PersonalDataForm = () => {
+  const [codigo, setCodigo] = useState(null)
+  const [nome, setNome] = useState(null)
+  const [nomeSocial, setNomeSocial] = useState(null)
+  const [sexo, setSexo] = useState(null)
+  const [raca, setRaca] = useState(null)
+  const [estadoCivil, setEstadoCivil] = useState(null)
+  const [dataNascimento, setDataNascimento] = useState(null)
+  const [grauInstituicao, setGrauInstituicao] = useState(null)
+  const [deficiencia, setDeficiencia] = useState(null)
+  const [nacionalidade, setNacionalidade] = useState(null)
+  const [cotaDeficiencia, setCotaDeficiencia] = useState(false)
+  const [proprietario, setProprietario] = useState(false)
+  const [mae, setMae] = useState(null)
+  const [pai, setPai] = useState(null)
+  const [cpf, setCpf] = useState(null)
+  const [pisNis, setPisNis] = useState(null)
+  const [rg, setRg] = useState(null)
+  const [rgDigito, setRgDigito] = useState(null)
+  const [ufRg, setUfRg] = useState(null)
+  const [dataEmissaoRg, setDataEmissaoRg] = useState(null)
+  const [orgaoExpedidorRg, setOrgaoExpedidorRg] = useState(null)
+  const [tituloEleitor, setTituloEleitor] = useState(null)
+  const [secao, setSecao] = useState(null)
+  const [zonaEleitoral, setZonaEleitoral] = useState(null)
+  const [numeroCnh, setNumeroCnh] = useState(null)
+  const [categoriaCnh, setCategoriaCnh] = useState(null)
+  const [dataPrimeiraCnh, setDataPrimeiraCnh] = useState(null)
+  const [ufCnh, setUfCnh] = useState(null)
+  const [expedicaoCnh, setExpedicaoCnh] = useState(null)
+  const [dataValidadeCnh, setDataValidadeCnh] = useState(null)
+  const [numeroCtps, setNumeroCtps] = useState(null)
+  const [serieCtps, setSerieCtps] = useState(null)
+  const [expedicaoCtps, setExpedicaoCtps] = useState(null)
+  const [ufCtps, setUfCtps] = useState(null)
+  const [numeroPassaporte, setNumeroPassaporte] = useState(null)
+  const [validadePassaporte, setValidadePassaporte] = useState(null)
+  const [cep, setCep] = useState(null)
+  const [uf, setUf] = useState(null)
+  const [cidade, setCidade] = useState(null)
+  const [bairro, setBairro] = useState(null)
+  const [logradouro, setLogradouro] = useState(null)
+  const [numero, setNumero] = useState(null)
+  const [complemento, setComplemento] = useState(null)
+  const [tipoEndereco, setTipoEndereco] = useState(null)
+  const [contatoTelefone, setContatoTelefone] = useState(null)
+  const [telefone, setTelefone] = useState(null)
+  const [tipoTelefone, setTipoTelefone] = useState(null)
+  const [contatoEmail, setContatoEmail] = useState(null)
+  const [email, setEmail] = useState(null)
+
   const backToPersonalData = () => {
     window.location.href = '#/trabalhador/dados_pessoais'
   }
 
-  const handleSubmit = () => {
-    console.log('submit')
+  const handleSubmit = async () => {
+    const data = {
+      nome: nome,
+      nomeSocial: nomeSocial,
+      informacoesPessoais: {
+        sexo: sexo,
+        raca: raca,
+        estadoCivil: estadoCivil,
+        dataNascimento: dataNascimento,
+        grauInstituicao: grauInstituicao,
+        deficiencia: deficiencia,
+        nacionalidade: nacionalidade,
+        cotaDeficiencia: cotaDeficiencia,
+        proprietario: proprietario,
+        mae: mae,
+        pai: pai,
+      },
+      documentos: {
+        cpf: cpf,
+        pisNis: pisNis,
+        rg: rg,
+        rgDigito: rgDigito,
+        ufRg: ufRg,
+        dataEmissaoRg: dataEmissaoRg,
+        orgaoExpedidorRg: orgaoExpedidorRg,
+      },
+      tituloEleitor: {
+        tituloEleitor: tituloEleitor,
+        secao: secao,
+        zonaEleitoral: zonaEleitoral,
+      },
+      cnh: {
+        numero: numeroCnh,
+        categoria: categoriaCnh,
+        dataPrimeiraCnh: dataPrimeiraCnh,
+        uf: ufCnh,
+        expedicao: expedicaoCnh,
+        dataValidade: dataValidadeCnh,
+      },
+      ctps: {
+        numero: numeroCtps,
+        serie: serieCtps,
+        expedicao: expedicaoCtps,
+        uf: ufCtps,
+      },
+      passaporte: { numero: numeroPassaporte, validade: validadePassaporte },
+      endereco: {
+        cep: cep,
+        uf: uf,
+        cidade: cidade,
+        bairro: bairro,
+        logradouro: logradouro,
+        numero: numero,
+        complemento: complemento,
+        tipo: tipoEndereco,
+      },
+      email: {
+        contato: contatoEmail,
+        email: email,
+      },
+      telefone: {
+        contato: contatoTelefone,
+        telefone: telefone,
+        tipo: tipoTelefone,
+      },
+    }
+
+    const result = await axios.post('/pessoa', data)
+
+    if (result.status === 200) {
+      backToPersonalData()
+    }
   }
 
   return (
@@ -37,15 +158,28 @@ const PersonalDataForm = () => {
               <CCardBody className="row">
                 <div className="mb-2 col-3">
                   <CFormLabel htmlFor="codigoInput">Código</CFormLabel>
-                  <CFormInput id="codigoInput" placeholder="Código" />
+                  <CFormInput
+                    id="codigoInput"
+                    placeholder="Código"
+                    onChange={(e) => setCodigo(e.target.value)}
+                    disabled
+                  />
                 </div>
                 <div className="mb-2 col-9">
                   <CFormLabel htmlFor="nomeInput">Nome</CFormLabel>
-                  <CFormInput id="nomeInput" placeholder="Nome" />
+                  <CFormInput
+                    id="nomeInput"
+                    placeholder="Nome"
+                    onChange={(e) => setNome(e.target.value)}
+                  />
                 </div>
                 <div className="mb-2 col-12">
                   <CFormLabel htmlFor="nomeSocialInput">Nome Social</CFormLabel>
-                  <CFormInput id="nomeSocialInput" placeholder="Nome Social" />
+                  <CFormInput
+                    id="nomeSocialInput"
+                    placeholder="Nome Social"
+                    onChange={(e) => setNomeSocial(e.target.value)}
+                  />
                 </div>
               </CCardBody>
             </CCard>
@@ -59,108 +193,127 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Informações Pessoais</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="bancoInput">Sexo</CFormLabel>
+                            <CFormLabel htmlFor="sexoInput">Sexo</CFormLabel>
                             <CFormSelect
-                              id="bancoInput"
+                              id="sexoInput"
                               className="mb-3"
                               aria-label="Selecione o Banco"
+                              onChange={(e) => setSexo(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Masculino</option>
-                              <option value="2">Feminino</option>
-                              <option value="3">Outros</option>
+                              <option value="masculino">Masculino</option>
+                              <option value="feminino">Feminino</option>
+                              <option value="outros">Outros</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="agenciaInput">Raça</CFormLabel>
+                            <CFormLabel htmlFor="racaInput">Raça</CFormLabel>
                             <CFormSelect
-                              id="agenciaInput"
+                              id="racaInput"
                               className="mb-2"
                               aria-label="Selecione o Agência"
+                              onChange={(e) => setRaca(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Branco</option>
-                              <option value="2">Negro</option>
-                              <option value="3">Pardo</option>
+                              <option value="branco">Branco</option>
+                              <option value="negro">Negro</option>
+                              <option value="pardo">Pardo</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="tipoInput">Estado Civil</CFormLabel>
+                            <CFormLabel htmlFor="estadoCivilInput">Estado Civil</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="estadoCivilInput"
                               className="mb-2"
                               aria-label="Selecione o Tipo da Conta"
+                              onChange={(e) => setEstadoCivil(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Solteiro</option>
-                              <option value="2">Casado</option>
-                              <option value="3">Viúvo</option>
+                              <option value="solteiro">Solteiro</option>
+                              <option value="casado">Casado</option>
+                              <option value="viúvo">Viúvo</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Data de Nascimento</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="__/__/____" />
+                            <CFormLabel htmlFor="dataNascimentoInput">
+                              Data de Nascimento
+                            </CFormLabel>
+                            <CFormInput
+                              id="dataNascimentoInput"
+                              placeholder="__/__/____"
+                              onChange={(e) => setDataNascimento(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="tipoInput">Grau de Instrução</CFormLabel>
+                            <CFormLabel htmlFor="grauInstrucaoInput">Grau de Instrução</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="grauInstrucaoInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo da Conta"
+                              aria-label="Selecione o Grau de Instrução"
+                              onChange={(e) => setGrauInstituicao(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Ensino Fundamental</option>
-                              <option value="2">Ensino Médio</option>
-                              <option value="3">Ensino Superior</option>
+                              <option value="ensino fundamental">Ensino Fundamental</option>
+                              <option value="ensino médio">Ensino Médio</option>
+                              <option value="ensino superior">Ensino Superior</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="tipoInput">Deficiência</CFormLabel>
+                            <CFormLabel htmlFor="deficienciaInput">Deficiência</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="deficienciaInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo da Conta"
+                              aria-label="Selecione a Deficiência"
+                              onChange={(e) => setDeficiencia(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Deficiência</option>
-                              <option value="2">Deficiência</option>
-                              <option value="3">Deficiência</option>
+                              <option value="deficiência visual">Deficiência Visual</option>
+                              <option value="deficiência motora">Deficiência Motora</option>
+                              <option value="deficiência mental">Deficiência Mental</option>
+                              <option value="deficiência auditiva">Deficiência Auditiva</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="tipoInput">Nacionalidade</CFormLabel>
+                            <CFormLabel htmlFor="nacionalidadeInput">Nacionalidade</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="nacionalidadeInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo da Conta"
+                              aria-label="Selecione a Nacionalidade"
+                              onChange={(e) => setNacionalidade(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Nacionalidade</option>
-                              <option value="2">Nacionalidade</option>
-                              <option value="3">Nacionalidade</option>
+                              <option value="brasileiro">Brasileiro(a)</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-6">
                             <CFormSwitch
                               label="Preenche cota de pessoas com deficiência"
                               id="disabilityquotaChecked"
-                              defaultChecked={false}
+                              onChange={(e) => setCotaDeficiencia(e.target.value)}
                             />
                           </div>
                           <div className="mb-2 col-6">
                             <CFormSwitch
                               label="Proprietário"
                               id="ownerChecked"
-                              defaultChecked={false}
+                              onChange={(e) => setProprietario(e.target.value)}
                             />
                           </div>
                           <div className="mb-2 col-6">
-                            <CFormLabel htmlFor="nContaInput">Nome da Mãe</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Nome da Mãe" />
+                            <CFormLabel htmlFor="nomeMaeInput">Nome da Mãe</CFormLabel>
+                            <CFormInput
+                              id="nomeMaeInput"
+                              placeholder="Nome da Mãe"
+                              onChange={(e) => setMae(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-6">
-                            <CFormLabel htmlFor="nContaInput">Nome do Pai</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Nome do Pai" />
+                            <CFormLabel htmlFor="nomePaiInput">Nome do Pai</CFormLabel>
+                            <CFormInput
+                              id="nomePaiInput"
+                              placeholder="Nome do Pai"
+                              onChange={(e) => setPai(e.target.value)}
+                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>
@@ -171,43 +324,66 @@ const PersonalDataForm = () => {
                         <CAccordionBody className="row">
                           <div className="row col-12">
                             <div className="mb-2 col-3">
-                              <CFormLabel htmlFor="nContaInput">CPF</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="CPF" />
+                              <CFormLabel htmlFor="cpfInput">CPF</CFormLabel>
+                              <CFormInput
+                                id="cpfInput"
+                                placeholder="CPF"
+                                onChange={(e) => setCpf(e.target.value)}
+                              />
                             </div>
                             <div className="mb-2 col-3">
-                              <CFormLabel htmlFor="nContaInput">PIS/NIS</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="PIS/NIS" />
+                              <CFormLabel htmlFor="pisNisInput">PIS/NIS</CFormLabel>
+                              <CFormInput
+                                id="pisNisInput"
+                                placeholder="PIS/NIS"
+                                onChange={(e) => setPisNis(e.target.value)}
+                              />
                             </div>
                           </div>
                           <div className="row col-12">
                             <div className="mb-2 col-3">
-                              <CFormLabel htmlFor="nContaInput">Número de Identidade</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="Número de Identidade" />
+                              <CFormLabel htmlFor="rgInput">Número de Identidade</CFormLabel>
+                              <CFormInput
+                                id="rgInput"
+                                placeholder="Número de Identidade"
+                                onChange={(e) => setRg(e.target.value)}
+                              />
                             </div>
                             <div className="mb-2 col-2">
-                              <CFormLabel htmlFor="nContaInput">Complemento</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="Complemento" />
+                              <CFormLabel htmlFor="digitoInput">Digito</CFormLabel>
+                              <CFormInput
+                                id="digitoInput"
+                                placeholder="Digito"
+                                onChange={(e) => setRgDigito(e.target.value)}
+                              />
                             </div>
                             <div className="mb-2 col-2">
-                              <CFormLabel htmlFor="tipoInput">UF</CFormLabel>
+                              <CFormLabel htmlFor="ufRgInput">UF</CFormLabel>
                               <CFormSelect
-                                id="tipoInput"
+                                id="ufRgInput"
                                 className="mb-2"
-                                aria-label="Selecione o Tipo da Conta"
+                                aria-label="Selecione a UF de emissão"
+                                onChange={(e) => setUfRg(e.target.value)}
                               >
                                 <option></option>
-                                <option value="1">UF</option>
-                                <option value="2">UF</option>
-                                <option value="3">UF</option>
+                                <option value="sp">SP</option>
                               </CFormSelect>
                             </div>
                             <div className="mb-2 col-2">
-                              <CFormLabel htmlFor="nContaInput">Data de Emissão</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="__/__/____" />
+                              <CFormLabel htmlFor="dataEmissaoInput">Data de Emissão</CFormLabel>
+                              <CFormInput
+                                id="dataEmissaoInput"
+                                placeholder="__/__/____"
+                                onChange={(e) => setDataEmissaoRg(e.target.value)}
+                              />
                             </div>
                             <div className="mb-2 col-3">
-                              <CFormLabel htmlFor="nContaInput">Órgão Expedidor</CFormLabel>
-                              <CFormInput id="nContaInput" placeholder="Órgão Expedidor" />
+                              <CFormLabel htmlFor="orgaoExpedidorInput">Órgão Expedidor</CFormLabel>
+                              <CFormInput
+                                id="orgaoExpedidorInput"
+                                placeholder="Órgão Expedidor"
+                                onChange={(e) => setOrgaoExpedidorRg(e.target.value)}
+                              />
                             </div>
                           </div>
                         </CAccordionBody>
@@ -218,16 +394,28 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Título de Eleitor</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Título de Eleitor</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Título de Eleitor" />
+                            <CFormLabel htmlFor="tituloEleitorInput">Título de Eleitor</CFormLabel>
+                            <CFormInput
+                              id="tituloEleitorInput"
+                              placeholder="Título de Eleitor"
+                              onChange={(e) => setTituloEleitor(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Seção</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Seção" />
+                            <CFormLabel htmlFor="secaoInput">Seção</CFormLabel>
+                            <CFormInput
+                              id="secaoInput"
+                              placeholder="Seção"
+                              onChange={(e) => setSecao(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Zona Eleitoral</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Zona Eleitoral" />
+                            <CFormLabel htmlFor="zonaEleitoralInput">Zona Eleitoral</CFormLabel>
+                            <CFormInput
+                              id="zonaEleitoralInput"
+                              placeholder="Zona Eleitoral"
+                              onChange={(e) => setZonaEleitoral(e.target.value)}
+                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>
@@ -237,37 +425,58 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Carteira de Habilitação</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Número</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Número" />
+                            <CFormLabel htmlFor="numeroCnhInput">Número</CFormLabel>
+                            <CFormInput
+                              id="numeroCnhInput"
+                              placeholder="Número"
+                              onChange={(e) => setNumeroCnh(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Categoria</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Categoria" />
+                            <CFormLabel htmlFor="categoriaCnhInput">Categoria</CFormLabel>
+                            <CFormInput
+                              id="categoriaCnhInput"
+                              placeholder="Categoria"
+                              onChange={(e) => setCategoriaCnh(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Dt. Primeira Habilitação</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Dt. Primeira Habilitação" />
+                            <CFormLabel htmlFor="dataPrimeiraHabilitaCnhInput">
+                              Dt. Primeira Habilitação
+                            </CFormLabel>
+                            <CFormInput
+                              id="dataPrimeiraHabilitaCnhInput"
+                              placeholder="Dt. Primeira Habilitação"
+                              onChange={(e) => setDataPrimeiraCnh(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="tipoInput">UF Expedidor</CFormLabel>
+                            <CFormLabel htmlFor="ufCnhInput">UF Expedidor</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="ufCnhInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo da Conta"
+                              aria-label="Selecione a UF Expedidor"
+                              onChange={(e) => setUfCnh(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">UF</option>
-                              <option value="2">UF</option>
-                              <option value="3">UF</option>
+                              <option value="sp">SP</option>
                             </CFormSelect>
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Expedição</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="__/__/____" />
+                            <CFormLabel htmlFor="expedicaoCnhInput">Expedição</CFormLabel>
+                            <CFormInput
+                              id="expedicaoCnhInput"
+                              placeholder="__/__/____"
+                              onChange={(e) => setExpedicaoCnh(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Dt. Validade</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Dt. Validade" />
+                            <CFormLabel htmlFor="dataValidadeCnhInput">Dt. Validade</CFormLabel>
+                            <CFormInput
+                              id="dataValidadeCnhInput"
+                              placeholder="Dt. Validade"
+                              onChange={(e) => setDataValidadeCnh(e.target.value)}
+                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>
@@ -277,28 +486,39 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Carteira de Trabalho</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Número</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Número" />
+                            <CFormLabel htmlFor="numeroCtpsInput">Número</CFormLabel>
+                            <CFormInput
+                              id="numeroCtpsInput"
+                              placeholder="Número"
+                              onChange={(e) => setNumeroCtps(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Série</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Categoria" />
+                            <CFormLabel htmlFor="serieCtpsInput">Série</CFormLabel>
+                            <CFormInput
+                              id="serieCtpsInput"
+                              placeholder="Categoria"
+                              onChange={(e) => setSerieCtps(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Expedição</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="__/__/____" />
+                            <CFormLabel htmlFor="expedicaoCtpsInput">Expedição</CFormLabel>
+                            <CFormInput
+                              id="expedicaoCtpsInput"
+                              placeholder="__/__/____"
+                              onChange={(e) => setExpedicaoCtps(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="tipoInput">UF Expedidor</CFormLabel>
+                            <CFormLabel htmlFor="ufCtpsInput">UF Expedidor</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="ufCtpsInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo da Conta"
+                              aria-label="Selecione a UF Expedidor CTPS"
+                              onChange={(e) => setUfCtps(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">UF</option>
-                              <option value="2">UF</option>
-                              <option value="3">UF</option>
+                              <option value="sp">SP</option>
                             </CFormSelect>
                           </div>
                         </CAccordionBody>
@@ -309,12 +529,22 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Passaporte</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Número</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Número" />
+                            <CFormLabel htmlFor="numeroPassaporteInput">Número</CFormLabel>
+                            <CFormInput
+                              id="numeroPassaporteInput"
+                              placeholder="Número"
+                              onChange={(e) => setNumeroPassaporte(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Validade do Visto</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="__/__/____" />
+                            <CFormLabel htmlFor="validadePassaporteInput">
+                              Validade do Visto
+                            </CFormLabel>
+                            <CFormInput
+                              id="validadePassaporteInput"
+                              placeholder="__/__/____"
+                              onChange={(e) => setValidadePassaporte(e.target.value)}
+                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>
@@ -333,45 +563,74 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Endereço</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">CEP</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="CEP" />
+                            <CFormLabel htmlFor="cepInput">CEP</CFormLabel>
+                            <CFormInput
+                              id="cepInput"
+                              placeholder="CEP"
+                              onChange={(e) => setCep(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">UF</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="UF" />
+                            <CFormLabel htmlFor="ufInput">UF</CFormLabel>
+                            <CFormInput
+                              id="ufInput"
+                              placeholder="UF"
+                              onChange={(e) => setUf(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Cidade</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Cidade" />
+                            <CFormLabel htmlFor="cidadeInput">Cidade</CFormLabel>
+                            <CFormInput
+                              id="cidadeInput"
+                              placeholder="Cidade"
+                              onChange={(e) => setCidade(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Bairro</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Bairro" />
+                            <CFormLabel htmlFor="bairroInput">Bairro</CFormLabel>
+                            <CFormInput
+                              id="bairroInput"
+                              placeholder="Bairro"
+                              onChange={(e) => setBairro(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Logradouro</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Logradouro" />
+                            <CFormLabel htmlFor="logradouroInput">Logradouro</CFormLabel>
+                            <CFormInput
+                              id="logradouroInput"
+                              placeholder="Logradouro"
+                              onChange={(e) => setLogradouro(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Número</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Número" />
+                            <CFormLabel htmlFor="numeroInput">Número</CFormLabel>
+                            <CFormInput
+                              id="numeroInput"
+                              placeholder="Número"
+                              onChange={(e) => setNumero(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="nContaInput">Complemento</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Complemento" />
+                            <CFormLabel htmlFor="complementoInput">Complemento</CFormLabel>
+                            <CFormInput
+                              id="complementoInput"
+                              placeholder="Complemento"
+                              onChange={(e) => setComplemento(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="tipoInput">Tipo do Endereço</CFormLabel>
+                            <CFormLabel htmlFor="tipoEnderecoInput">Tipo do Endereço</CFormLabel>
                             <CFormSelect
-                              id="tipoInput"
+                              id="tipoEnderecoInput"
                               className="mb-2"
                               aria-label="Selecione o Tipo do Endereço"
+                              onChange={(e) => setTipoEndereco(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Principal</option>
-                              <option value="2">Residencial</option>
-                              <option value="3">Cobrança</option>
-                              <option value="3">Comercial</option>
+                              <option value="principal">Principal</option>
+                              <option value="residencial">Residencial</option>
+                              <option value="cobrança">Cobrança</option>
+                              <option value="comercial">Comercial</option>
                             </CFormSelect>
                           </div>
                         </CAccordionBody>
@@ -382,26 +641,35 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Telefone</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Contato</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Contato" />
+                            <CFormLabel htmlFor="contatoTelefoneInput">Contato</CFormLabel>
+                            <CFormInput
+                              id="contatoTelefoneInput"
+                              placeholder="Contato"
+                              onChange={(e) => setContatoTelefone(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="nContaInput">Telefone</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Telefone" />
+                            <CFormLabel htmlFor="telefoneInput">Telefone</CFormLabel>
+                            <CFormInput
+                              id="telefoneInput"
+                              placeholder="Telefone"
+                              onChange={(e) => setTelefone(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-4">
                             <CFormLabel htmlFor="tipoInput">Tipo</CFormLabel>
                             <CFormSelect
                               id="tipoInput"
                               className="mb-2"
-                              aria-label="Selecione o Tipo do Endereço"
+                              aria-label="Selecione o Tipo do Telefone"
+                              onChange={(e) => setTipoTelefone(e.target.value)}
                             >
                               <option></option>
-                              <option value="1">Principal</option>
-                              <option value="2">Celular</option>
-                              <option value="3">Residencial</option>
-                              <option value="3">Comercial</option>
-                              <option value="3">Fax</option>
+                              <option value="principal">Principal</option>
+                              <option value="celular">Celular</option>
+                              <option value="residencial">Residencial</option>
+                              <option value="comercial">Comercial</option>
+                              <option value="fax">Fax</option>
                             </CFormSelect>
                           </div>
                         </CAccordionBody>
@@ -412,12 +680,20 @@ const PersonalDataForm = () => {
                         <CAccordionHeader>Email</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-6">
-                            <CFormLabel htmlFor="nContaInput">Contato</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Contato" />
+                            <CFormLabel htmlFor="contatoEmailInput">Contato</CFormLabel>
+                            <CFormInput
+                              id="contatoEmailInput"
+                              placeholder="Contato"
+                              onChange={(e) => setContatoEmail(e.target.value)}
+                            />
                           </div>
                           <div className="mb-2 col-6">
-                            <CFormLabel htmlFor="nContaInput">Email</CFormLabel>
-                            <CFormInput id="nContaInput" placeholder="Telefone" />
+                            <CFormLabel htmlFor="emailInput">E-mail</CFormLabel>
+                            <CFormInput
+                              id="emailInput"
+                              placeholder="E-mail"
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   CAccordion,
   CAccordionBody,
@@ -12,11 +12,35 @@ import {
   CFormInput,
   CFormLabel,
   CFormSelect,
-  CFormSwitch,
   CRow,
 } from '@coreui/react'
 
 const BondDataForm = () => {
+  const [eSocial, setESocial] = useState()
+  const [matricula, setMatricula] = useState()
+  const [trabalhador, setTrabalhador] = useState()
+  const [cbo, setCbo] = useState()
+  const [dataAdmissao, setDataAdmissao] = useState()
+  const [dataFgts, setDataFgts] = useState()
+  const [bancoRemuneracao, setBancoRemuneracao] = useState()
+  const [agenciaRemuneracao, setAgenciaRemuneracao] = useState()
+  const [tipoContaRemuneracao, setTipoContaRemuneracao] = useState()
+  const [numeroContaRemuneracao, setNumeroContaRemuneracao] = useState()
+  const [digitoVerificadoRemuneracao, setDigitoVerificadorRemuneracao] = useState()
+  const [operacaoRemuneracao, setOperacaoRemuneracao] = useState()
+  const [bancoFgts, setBancoFgts] = useState()
+  const [agenciaFgts, setAgenciaFgts] = useState()
+  const [tipoContaFgts, setTipoContaFgts] = useState()
+  const [numeroContaFgts, setNumeroContaFgts] = useState()
+  const [digitoVerificadoFgts, setDigitoVerificadorFgts] = useState()
+  const [operacaoFgts, setOperacaoFgts] = useState()
+  const [cargo, setCargo] = useState()
+  const [salario, setSalario] = useState()
+  const [tipoPagamento, setTipoPagamento] = useState()
+  const [horario, setHorario] = useState()
+  const [valeTransporte, setValeTransporte] = useState()
+  const [planoSaude, setPlanoSaude] = useState()
+
   return (
     <CContainer>
       <CRow>
