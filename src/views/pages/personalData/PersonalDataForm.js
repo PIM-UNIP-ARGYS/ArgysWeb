@@ -19,6 +19,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 import axios from '../../../services/axios.service'
+import { format, parse } from 'date-fns'
 
 const PersonalDataForm = () => {
   const [codigo, setCodigo] = useState(null)
@@ -71,11 +72,29 @@ const PersonalDataForm = () => {
   const [contatoEmail, setContatoEmail] = useState(null)
   const [email, setEmail] = useState(null)
 
+  const formatDate = (date) => {
+    if (!date) {
+      return null
+    }
+    const dateSplit = date.split('/')
+    const dateObject = new Date(dateSplit[2], dateSplit[1] - 1, dateSplit[0])
+    const dateFormat = dateObject.toLocaleDateString('en-CA') + 'T16:49:36.751Z'
+    return dateFormat
+  }
+
   const backToPersonalData = () => {
     window.location.href = '#/trabalhador/dados_pessoais'
   }
 
   const handleSubmit = async () => {
+    const newDataNascimento = formatDate(dataNascimento)
+    const newDataEmissaoRg = formatDate(dataEmissaoRg)
+    const newDataPrimeiraCnh = formatDate(dataPrimeiraCnh)
+    const newExpedicaoCnh = formatDate(expedicaoCnh)
+    const newDataValidadeCnh = formatDate(dataValidadeCnh)
+    const newExpedicaoCtps = formatDate(expedicaoCtps)
+    const newValidadePassaporte = formatDate(validadePassaporte)
+
     const data = {
       nome: nome,
       nomeSocial: nomeSocial,
@@ -83,12 +102,12 @@ const PersonalDataForm = () => {
         sexo: sexo,
         raca: raca,
         estadoCivil: estadoCivil,
-        dataNascimento: dataNascimento,
+        dataNascimento: newDataNascimento,
         grauInstituicao: grauInstituicao,
         deficiencia: deficiencia,
         nacionalidade: nacionalidade,
-        cotaDeficiencia: cotaDeficiencia,
-        proprietario: proprietario,
+        cotaDeficiencia: cotaDeficiencia === 'on' ? true : false,
+        proprietario: proprietario === 'on' ? true : false,
         mae: mae,
         pai: pai,
       },
@@ -98,29 +117,29 @@ const PersonalDataForm = () => {
         rg: rg,
         rgDigito: rgDigito,
         ufRg: ufRg,
-        dataEmissaoRg: dataEmissaoRg,
-        orgaoExpedidorRg: orgaoExpedidorRg,
+        dataEmissaoRg: newDataEmissaoRg,
+        orgaoExpedidor: orgaoExpedidorRg,
       },
       tituloEleitor: {
         tituloEleitor: tituloEleitor,
         secao: secao,
         zonaEleitoral: zonaEleitoral,
       },
-      cnh: {
-        numero: numeroCnh,
-        categoria: categoriaCnh,
-        dataPrimeiraCnh: dataPrimeiraCnh,
-        uf: ufCnh,
-        expedicao: expedicaoCnh,
-        dataValidade: dataValidadeCnh,
-      },
+      // cnh: {
+      //   numero: numeroCnh,
+      //   categoria: categoriaCnh,
+      //   dataPrimeiraCnh: newDataPrimeiraCnh,
+      //   uf: ufCnh,
+      //   expedicao: newExpedicaoCnh,
+      //   dataValidade: newDataValidadeCnh,
+      // },
       ctps: {
         numero: numeroCtps,
         serie: serieCtps,
-        expedicao: expedicaoCtps,
+        expedicao: newExpedicaoCtps,
         uf: ufCtps,
       },
-      passaporte: { numero: numeroPassaporte, validade: validadePassaporte },
+      // passaporte: { numero: numeroPassaporte, validade: newValidadePassaporte },
       endereco: {
         cep: cep,
         uf: uf,
