@@ -25,24 +25,9 @@ const BondDataForm = () => {
   const [cbo, setCbo] = useState()
   const [dataAdmissao, setDataAdmissao] = useState()
   const [dataFgts, setDataFgts] = useState()
-  const [bancoRemuneracao, setBancoRemuneracao] = useState()
-  const [agenciaRemuneracao, setAgenciaRemuneracao] = useState()
-  const [tipoContaRemuneracao, setTipoContaRemuneracao] = useState()
-  const [numeroContaRemuneracao, setNumeroContaRemuneracao] = useState()
-  const [digitoVerificadoRemuneracao, setDigitoVerificadorRemuneracao] = useState()
-  const [operacaoRemuneracao, setOperacaoRemuneracao] = useState()
-  const [bancoFgts, setBancoFgts] = useState()
-  const [agenciaFgts, setAgenciaFgts] = useState()
-  const [tipoContaFgts, setTipoContaFgts] = useState()
-  const [numeroContaFgts, setNumeroContaFgts] = useState()
-  const [digitoVerificadoFgts, setDigitoVerificadorFgts] = useState()
-  const [operacaoFgts, setOperacaoFgts] = useState()
   const [cargo, setCargo] = useState()
   const [salario, setSalario] = useState()
   const [tipoPagamento, setTipoPagamento] = useState()
-  const [horario, setHorario] = useState()
-  const [valeTransporte, setValeTransporte] = useState()
-  const [planoSaude, setPlanoSaude] = useState()
 
   const handleBack = () => {
     window.location.href = '#/trabalhador/vinculo'
@@ -58,16 +43,28 @@ const BondDataForm = () => {
             <CCardBody>
               <CForm className="row">
                 <div className="mb-2 col-2">
-                  <CFormLabel htmlFor="codigoInput">Matrícula eSocial</CFormLabel>
-                  <CFormInput id="codigoInput" placeholder="Código" />
+                  <CFormLabel htmlFor="matriculaEsocialInput">Matrícula eSocial</CFormLabel>
+                  <CFormInput
+                    id="matriculaEsocialInput"
+                    placeholder="Matrícula eSocial"
+                    onChange={(e) => setESocial(e.target.value)}
+                  />
                 </div>
                 <div className="mb-2 col-2">
-                  <CFormLabel htmlFor="nomeInput">Matrícula</CFormLabel>
-                  <CFormInput id="nomeInput" placeholder="Nome" />
+                  <CFormLabel htmlFor="matriculaInput">Matrícula</CFormLabel>
+                  <CFormInput
+                    id="matriculaInput"
+                    placeholder="Matrícula"
+                    onChange={(e) => setMatricula(e.target.value)}
+                  />
                 </div>
                 <div className="mb-2 col-8">
-                  <CFormLabel htmlFor="nomeSocialInput">Trabalhador</CFormLabel>
-                  <CFormInput id="nomeSocialInput" placeholder="Nome Social" />
+                  <CFormLabel htmlFor="trabalhadorInput">Trabalhador</CFormLabel>
+                  <CFormInput
+                    id="trabalhadorInput"
+                    placeholder="Trabalhador"
+                    onChange={(e) => setTrabalhador(e.target.value)}
+                  />
                 </div>
               </CForm>
             </CCardBody>
@@ -78,16 +75,28 @@ const BondDataForm = () => {
                 <CAccordionHeader>Dados Gerais</CAccordionHeader>
                 <CAccordionBody className="row">
                   <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">CBO</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="CBO" />
+                    <CFormLabel htmlFor="cboInput">CBO</CFormLabel>
+                    <CFormInput
+                      id="cboInput"
+                      placeholder="CBO"
+                      onChange={(e) => setCbo(e.target.value)}
+                    />
                   </div>
                   <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Data de admissão</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="__/__/____" />
+                    <CFormLabel htmlFor="dataAdmissaoInput">Data de admissão</CFormLabel>
+                    <CFormInput
+                      id="dataAdmissaoInput"
+                      placeholder="__/__/____"
+                      onChange={(e) => setDataAdmissao(e.target.value)}
+                    />
                   </div>
                   <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Data de opção FGTS</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="__/__/____" />
+                    <CFormLabel htmlFor="dataFgtsInput">Data de opção FGTS</CFormLabel>
+                    <CFormInput
+                      id="dataFgtsInput"
+                      placeholder="__/__/____"
+                      onChange={(e) => setDataFgts(e.target.value)}
+                    />
                   </div>
                 </CAccordionBody>
               </CAccordionItem>
@@ -99,12 +108,20 @@ const BondDataForm = () => {
                 <CAccordionHeader>Cargos e Salários</CAccordionHeader>
                 <CAccordionBody className="row">
                   <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Cargo</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="Cargo" />
+                    <CFormLabel htmlFor="cargoInput">Cargo</CFormLabel>
+                    <CFormInput
+                      id="cargoInput"
+                      placeholder="Cargo"
+                      onChange={(e) => setCargo(e.target.value)}
+                    />
                   </div>
                   <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Salário</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="Salário" />
+                    <CFormLabel htmlFor="salarioInput">Salário</CFormLabel>
+                    <CFormInput
+                      id="salarioInput"
+                      placeholder="Salário"
+                      onChange={(e) => setSalario(e.target.value)}
+                    />
                   </div>
                   <div className="mb-2 col-4">
                     <CFormLabel htmlFor="tipoInput">Tipo de pagamento</CFormLabel>
@@ -112,9 +129,10 @@ const BondDataForm = () => {
                       id="tipoInput"
                       className="mb-2"
                       aria-label="Selecione o Tipo de pagamento"
+                      onChange={(e) => setTipoPagamento(e.target.value)}
                     >
                       <option></option>
-                      <option value="1">Mensais</option>
+                      <option value="mensais">Mensais</option>
                     </CFormSelect>
                   </div>
                 </CAccordionBody>
