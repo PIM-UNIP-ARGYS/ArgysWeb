@@ -19,7 +19,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 import axios from '../../../services/axios.service'
-import { format, parse } from 'date-fns'
 
 const PersonalDataForm = () => {
   const [codigo, setCodigo] = useState(null)
@@ -46,18 +45,10 @@ const PersonalDataForm = () => {
   const [tituloEleitor, setTituloEleitor] = useState(null)
   const [secao, setSecao] = useState(null)
   const [zonaEleitoral, setZonaEleitoral] = useState(null)
-  const [numeroCnh, setNumeroCnh] = useState(null)
-  const [categoriaCnh, setCategoriaCnh] = useState(null)
-  const [dataPrimeiraCnh, setDataPrimeiraCnh] = useState(null)
-  const [ufCnh, setUfCnh] = useState(null)
-  const [expedicaoCnh, setExpedicaoCnh] = useState(null)
-  const [dataValidadeCnh, setDataValidadeCnh] = useState(null)
   const [numeroCtps, setNumeroCtps] = useState(null)
   const [serieCtps, setSerieCtps] = useState(null)
   const [expedicaoCtps, setExpedicaoCtps] = useState(null)
   const [ufCtps, setUfCtps] = useState(null)
-  const [numeroPassaporte, setNumeroPassaporte] = useState(null)
-  const [validadePassaporte, setValidadePassaporte] = useState(null)
   const [cep, setCep] = useState(null)
   const [uf, setUf] = useState(null)
   const [cidade, setCidade] = useState(null)
@@ -89,11 +80,7 @@ const PersonalDataForm = () => {
   const handleSubmit = async () => {
     const newDataNascimento = formatDate(dataNascimento)
     const newDataEmissaoRg = formatDate(dataEmissaoRg)
-    const newDataPrimeiraCnh = formatDate(dataPrimeiraCnh)
-    const newExpedicaoCnh = formatDate(expedicaoCnh)
-    const newDataValidadeCnh = formatDate(dataValidadeCnh)
     const newExpedicaoCtps = formatDate(expedicaoCtps)
-    const newValidadePassaporte = formatDate(validadePassaporte)
 
     const data = {
       nome: nome,
@@ -125,21 +112,12 @@ const PersonalDataForm = () => {
         secao: secao,
         zonaEleitoral: zonaEleitoral,
       },
-      // cnh: {
-      //   numero: numeroCnh,
-      //   categoria: categoriaCnh,
-      //   dataPrimeiraCnh: newDataPrimeiraCnh,
-      //   uf: ufCnh,
-      //   expedicao: newExpedicaoCnh,
-      //   dataValidade: newDataValidadeCnh,
-      // },
       ctps: {
         numero: numeroCtps,
         serie: serieCtps,
         expedicao: newExpedicaoCtps,
         uf: ufCtps,
       },
-      // passaporte: { numero: numeroPassaporte, validade: newValidadePassaporte },
       endereco: {
         cep: cep,
         uf: uf,
@@ -150,15 +128,21 @@ const PersonalDataForm = () => {
         complemento: complemento,
         tipo: tipoEndereco,
       },
-      email: {
+    }
+
+    if (email && contatoEmail) {
+      data.email = {
         contato: contatoEmail,
         email: email,
-      },
-      telefone: {
+      }
+    }
+
+    if (telefone && contatoTelefone && tipoTelefone) {
+      data.telefone = {
         contato: contatoTelefone,
         telefone: telefone,
         tipo: tipoTelefone,
-      },
+      }
     }
 
     const result = await axios.post('/pessoa', data)
@@ -441,67 +425,6 @@ const PersonalDataForm = () => {
                     </CAccordion>
                     <CAccordion className="p-1">
                       <CAccordionItem>
-                        <CAccordionHeader>Carteira de Habilitação</CAccordionHeader>
-                        <CAccordionBody className="row">
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="numeroCnhInput">Número</CFormLabel>
-                            <CFormInput
-                              id="numeroCnhInput"
-                              placeholder="Número"
-                              onChange={(e) => setNumeroCnh(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="categoriaCnhInput">Categoria</CFormLabel>
-                            <CFormInput
-                              id="categoriaCnhInput"
-                              placeholder="Categoria"
-                              onChange={(e) => setCategoriaCnh(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="dataPrimeiraHabilitaCnhInput">
-                              Dt. Primeira Habilitação
-                            </CFormLabel>
-                            <CFormInput
-                              id="dataPrimeiraHabilitaCnhInput"
-                              placeholder="Dt. Primeira Habilitação"
-                              onChange={(e) => setDataPrimeiraCnh(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="ufCnhInput">UF Expedidor</CFormLabel>
-                            <CFormSelect
-                              id="ufCnhInput"
-                              className="mb-2"
-                              aria-label="Selecione a UF Expedidor"
-                              onChange={(e) => setUfCnh(e.target.value)}
-                            >
-                              <option></option>
-                              <option value="sp">SP</option>
-                            </CFormSelect>
-                          </div>
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="expedicaoCnhInput">Expedição</CFormLabel>
-                            <CFormInput
-                              id="expedicaoCnhInput"
-                              placeholder="__/__/____"
-                              onChange={(e) => setExpedicaoCnh(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-2 col-4">
-                            <CFormLabel htmlFor="dataValidadeCnhInput">Dt. Validade</CFormLabel>
-                            <CFormInput
-                              id="dataValidadeCnhInput"
-                              placeholder="Dt. Validade"
-                              onChange={(e) => setDataValidadeCnh(e.target.value)}
-                            />
-                          </div>
-                        </CAccordionBody>
-                      </CAccordionItem>
-                    </CAccordion>
-                    <CAccordion className="p-1">
-                      <CAccordionItem>
                         <CAccordionHeader>Carteira de Trabalho</CAccordionHeader>
                         <CAccordionBody className="row">
                           <div className="mb-2 col-3">
@@ -539,31 +462,6 @@ const PersonalDataForm = () => {
                               <option></option>
                               <option value="sp">SP</option>
                             </CFormSelect>
-                          </div>
-                        </CAccordionBody>
-                      </CAccordionItem>
-                    </CAccordion>
-                    <CAccordion className="p-1">
-                      <CAccordionItem>
-                        <CAccordionHeader>Passaporte</CAccordionHeader>
-                        <CAccordionBody className="row">
-                          <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="numeroPassaporteInput">Número</CFormLabel>
-                            <CFormInput
-                              id="numeroPassaporteInput"
-                              placeholder="Número"
-                              onChange={(e) => setNumeroPassaporte(e.target.value)}
-                            />
-                          </div>
-                          <div className="mb-2 col-3">
-                            <CFormLabel htmlFor="validadePassaporteInput">
-                              Validade do Visto
-                            </CFormLabel>
-                            <CFormInput
-                              id="validadePassaporteInput"
-                              placeholder="__/__/____"
-                              onChange={(e) => setValidadePassaporte(e.target.value)}
-                            />
                           </div>
                         </CAccordionBody>
                       </CAccordionItem>
