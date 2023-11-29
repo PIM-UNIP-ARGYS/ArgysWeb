@@ -147,7 +147,7 @@ const PersonalDataForm = () => {
 
     const result = await axios.post('/pessoa', data)
 
-    if (result.status === 200) {
+    if (result.status === 201) {
       backToPersonalData()
     }
   }
