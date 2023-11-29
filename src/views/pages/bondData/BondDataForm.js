@@ -4,6 +4,7 @@ import {
   CAccordionBody,
   CAccordionHeader,
   CAccordionItem,
+  CButton,
   CCard,
   CCardBody,
   CCol,
@@ -14,6 +15,8 @@ import {
   CFormSelect,
   CRow,
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import { cilPlus } from '@coreui/icons'
 
 const BondDataForm = () => {
   const [eSocial, setESocial] = useState()
@@ -40,6 +43,12 @@ const BondDataForm = () => {
   const [horario, setHorario] = useState()
   const [valeTransporte, setValeTransporte] = useState()
   const [planoSaude, setPlanoSaude] = useState()
+
+  const handleBack = () => {
+    window.location.href = '#/trabalhador/vinculo'
+  }
+
+  const handleSubmit = async () => {}
 
   return (
     <CContainer>
@@ -87,95 +96,6 @@ const BondDataForm = () => {
           <CCard className="p-1 mb-3">
             <CAccordion>
               <CAccordionItem>
-                <CAccordionHeader>Informações bancárias</CAccordionHeader>
-                <CAccordionBody>
-                  <CAccordion className="p-1">
-                    <CAccordionItem>
-                      <CAccordionHeader>Remuneração</CAccordionHeader>
-                      <CAccordionBody className="row">
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Banco</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Banco" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Agência</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Agência" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="tipoInput">Tipo de conta</CFormLabel>
-                          <CFormSelect
-                            id="tipoInput"
-                            className="mb-2"
-                            aria-label="Selecione o Tipo de conta"
-                          >
-                            <option></option>
-                            <option value="1">Corrente</option>
-                            <option value="2">Poupança</option>
-                            <option value="3">Salário</option>
-                          </CFormSelect>
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Nº da conta</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Nº da conta" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Dígito verificador</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Dígito verificador" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Operação</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Operação" />
-                        </div>
-                      </CAccordionBody>
-                    </CAccordionItem>
-                  </CAccordion>
-                  <CAccordion className="p-1">
-                    <CAccordionItem>
-                      <CAccordionHeader>FGTS</CAccordionHeader>
-                      <CAccordionBody className="row">
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Banco</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Banco" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Agência</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Agência" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="tipoInput">Tipo de conta</CFormLabel>
-                          <CFormSelect
-                            id="tipoInput"
-                            className="mb-2"
-                            aria-label="Selecione o Tipo de conta"
-                          >
-                            <option></option>
-                            <option value="1">Corrente</option>
-                            <option value="2">Poupança</option>
-                            <option value="3">Salário</option>
-                          </CFormSelect>
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Nº da conta</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Nº da conta" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Dígito verificador</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Dígito verificador" />
-                        </div>
-                        <div className="mb-2 col-4">
-                          <CFormLabel htmlFor="nContaInput">Operação</CFormLabel>
-                          <CFormInput id="nContaInput" placeholder="Operação" />
-                        </div>
-                      </CAccordionBody>
-                    </CAccordionItem>
-                  </CAccordion>
-                </CAccordionBody>
-              </CAccordionItem>
-            </CAccordion>
-          </CCard>
-          <CCard className="p-1 mb-3">
-            <CAccordion>
-              <CAccordionItem>
                 <CAccordionHeader>Cargos e Salários</CAccordionHeader>
                 <CAccordionBody className="row">
                   <div className="mb-2 col-4">
@@ -197,21 +117,21 @@ const BondDataForm = () => {
                       <option value="1">Mensais</option>
                     </CFormSelect>
                   </div>
-                  <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Horários</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="Horários" />
-                  </div>
-                  <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Vale transporte</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="Vale transporte" />
-                  </div>
-                  <div className="mb-2 col-4">
-                    <CFormLabel htmlFor="nContaInput">Planos de saúde</CFormLabel>
-                    <CFormInput id="nContaInput" placeholder="Planos de saúde" />
-                  </div>
                 </CAccordionBody>
               </CAccordionItem>
             </CAccordion>
+          </CCard>
+          <CCard>
+            <CCardBody>
+              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                <CButton color="success" className="me-md-2" onClick={handleSubmit}>
+                  Salvar <CIcon icon={cilPlus} />
+                </CButton>
+                <CButton color="dark" className="me-md-2" onClick={handleBack}>
+                  Voltar <CIcon icon={cilPlus} />
+                </CButton>
+              </div>
+            </CCardBody>
           </CCard>
         </CCol>
       </CRow>

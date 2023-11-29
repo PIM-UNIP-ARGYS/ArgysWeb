@@ -30,11 +30,6 @@ const _nav = [
         name: 'Vínculo',
         to: '/trabalhador/vinculo',
       },
-      {
-        component: CNavItem,
-        name: 'Férias',
-        to: '/trabalhador/ferias',
-      },
     ],
   },
   {
@@ -52,11 +47,6 @@ const _nav = [
         component: CNavItem,
         name: 'CBO',
         to: '/tabelas/cbo',
-      },
-      {
-        component: CNavItem,
-        name: 'Plano de Saúde',
-        to: '/tabelas/plano_saude',
       },
     ],
   },
