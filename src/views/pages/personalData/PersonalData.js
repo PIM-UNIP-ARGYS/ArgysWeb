@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -9,20 +9,37 @@ import {
   CRow,
   CTable,
   CTableBody,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
+import PersonalDataTable from './PersonalDataTable'
 
 const PersonalData = () => {
+  const [listData, setListData] = useState([])
+
   const created = () => {
     window.location.href = '#/trabalhador/dados_pessoais/create'
   }
 
-  const handleGetPersonalDataList = () => {}
+  const handleGetPersonalDataList = async () => {
+    const list = await api.get('/pessoa')
+
+    if (list.status === 200) {
+      setListData(list.data)
+    }
+  }
+
+  useEffect(() => {
+    handleGetPersonalDataList()
+  }, [])
+
+  if (listData.length === 0) {
+    return <></>
+  }
 
   return (
     <CContainer>
@@ -52,20 +69,8 @@ const PersonalData = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>
-                      <button>E</button>
-                      <button>D</button>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {listData &&
+                    listData.map((item, index) => <PersonalDataTable key={index} data={item} />)}
                 </CTableBody>
               </CTable>
             </CCardBody>

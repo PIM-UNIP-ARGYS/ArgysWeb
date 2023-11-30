@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -16,10 +16,30 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
+import BondDataTable from './BondDataTable'
 
 const BondData = () => {
+  const [listData, setListData] = useState([])
+
   const created = () => {
     window.location.href = '#/trabalhador/vinculo/create'
+  }
+
+  const handleGetList = async () => {
+    const list = await api.get('/vinculo')
+
+    if (list.status === 200) {
+      setListData(list.data)
+    }
+  }
+
+  useEffect(() => {
+    handleGetList()
+  }, [])
+
+  if (listData.length === 0) {
+    return <></>
   }
 
   return (
@@ -40,24 +60,14 @@ const BondData = () => {
                   <CTableRow>
                     <CTableHeaderCell scope="col">Matrícula</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Trabalhador</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Categoria</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Data de admissão</CTableHeaderCell>
                     <CTableHeaderCell scope="col">CPF</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>
-                      <button>E</button>
-                      <button>D</button>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {listData &&
+                    listData.map((item, index) => <BondDataTable key={index} data={item} />)}
                 </CTableBody>
               </CTable>
             </CCardBody>
