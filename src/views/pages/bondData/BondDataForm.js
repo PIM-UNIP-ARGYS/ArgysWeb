@@ -20,8 +20,6 @@ import { cilPlus } from '@coreui/icons'
 import api from 'src/services/axios.service'
 
 const BondDataForm = () => {
-  const [eSocial, setESocial] = useState()
-  const [matricula, setMatricula] = useState()
   const [trabalhador, setTrabalhador] = useState()
   const [cbo, setCbo] = useState()
   const [dataAdmissao, setDataAdmissao] = useState()
@@ -74,19 +72,11 @@ const BondDataForm = () => {
               <CForm className="row">
                 <div className="mb-2 col-2">
                   <CFormLabel htmlFor="matriculaEsocialInput">Matrícula eSocial</CFormLabel>
-                  <CFormInput
-                    id="matriculaEsocialInput"
-                    placeholder="Matrícula eSocial"
-                    onChange={(e) => setESocial(e.target.value)}
-                  />
+                  <CFormInput id="matriculaEsocialInput" placeholder="Matrícula eSocial" disabled />
                 </div>
                 <div className="mb-2 col-2">
                   <CFormLabel htmlFor="matriculaInput">Matrícula</CFormLabel>
-                  <CFormInput
-                    id="matriculaInput"
-                    placeholder="Matrícula"
-                    onChange={(e) => setMatricula(e.target.value)}
-                  />
+                  <CFormInput id="matriculaInput" placeholder="Matrícula" disabled />
                 </div>
                 <div className="mb-2 col-8">
                   <CFormLabel htmlFor="trabalhadorInput">Trabalhador</CFormLabel>

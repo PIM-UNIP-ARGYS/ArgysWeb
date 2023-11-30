@@ -9,7 +9,6 @@ import {
   CForm,
   CFormInput,
   CFormLabel,
-  CFormSwitch,
   CRow,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'

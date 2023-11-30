@@ -16,7 +16,6 @@ import { cilPlus } from '@coreui/icons'
 import api from 'src/services/axios.service'
 
 const JobDataForm = () => {
-  const [codigo, setCodigo] = useState(null)
   const [descricao, setDescricao] = useState(null)
   const [cbo, setCbo] = useState(false)
 

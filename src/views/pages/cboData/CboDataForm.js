@@ -17,7 +17,6 @@ import { cilPlus } from '@coreui/icons'
 import api from 'src/services/axios.service'
 
 const CboDataForm = () => {
-  const [codigo, setCodigo] = useState(null)
   const [descricao, setDescricao] = useState(null)
   const [salarioAula, setSalarioAula] = useState(false)
   const [motoristaProfissional, setMotoristaProfissional] = useState(false)
@@ -48,12 +47,7 @@ const CboDataForm = () => {
               <CForm className="row">
                 <div className="mb-2 col-3">
                   <CFormLabel htmlFor="codigoInput">Código</CFormLabel>
-                  <CFormInput
-                    id="codigoInput"
-                    placeholder="Código"
-                    disabled
-                    onChange={(e) => setCodigo(e.target.value)}
-                  />
+                  <CFormInput id="codigoInput" placeholder="Código" disabled />
                 </div>
                 <div className="row col-9 mt-4">
                   <div className="mt-3 col-4">

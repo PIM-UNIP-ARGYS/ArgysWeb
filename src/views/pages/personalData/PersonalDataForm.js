@@ -21,7 +21,6 @@ import { cilPlus } from '@coreui/icons'
 import axios from '../../../services/axios.service'
 
 const PersonalDataForm = () => {
-  const [codigo, setCodigo] = useState(null)
   const [nome, setNome] = useState(null)
   const [nomeSocial, setNomeSocial] = useState(null)
   const [sexo, setSexo] = useState(null)
@@ -161,12 +160,7 @@ const PersonalDataForm = () => {
               <CCardBody className="row">
                 <div className="mb-2 col-3">
                   <CFormLabel htmlFor="codigoInput">Código</CFormLabel>
-                  <CFormInput
-                    id="codigoInput"
-                    placeholder="Código"
-                    onChange={(e) => setCodigo(e.target.value)}
-                    disabled
-                  />
+                  <CFormInput id="codigoInput" placeholder="Código" disabled />
                 </div>
                 <div className="mb-2 col-9">
                   <CFormLabel htmlFor="nomeInput">Nome</CFormLabel>
