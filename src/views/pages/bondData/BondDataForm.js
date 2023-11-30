@@ -17,6 +17,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
 
 const BondDataForm = () => {
   const [eSocial, setESocial] = useState()
@@ -29,11 +30,40 @@ const BondDataForm = () => {
   const [salario, setSalario] = useState()
   const [tipoPagamento, setTipoPagamento] = useState()
 
+  const formatDate = (date) => {
+    if (!date) {
+      return null
+    }
+    const dateSplit = date.split('/')
+    const dateObject = new Date(dateSplit[2], dateSplit[1] - 1, dateSplit[0])
+    const dateFormat = dateObject.toLocaleDateString('en-CA') + 'T16:49:36.751Z'
+    return dateFormat
+  }
+
   const handleBack = () => {
     window.location.href = '#/trabalhador/vinculo'
   }
 
-  const handleSubmit = async () => {}
+  const handleSubmit = async () => {
+    const dtAdmissao = formatDate(dataAdmissao)
+    const dtFgts = formatDate(dataFgts)
+
+    const data = {
+      pessoa: trabalhador,
+      cbo: cbo,
+      dtAdmissao: dtAdmissao,
+      dtFgts: dtFgts,
+      cargo: cargo,
+      salario: salario,
+      tipoPagamento: tipoPagamento,
+    }
+
+    const result = await api.post('/vinculo', data)
+
+    if (result.status === 201) {
+      handleBack()
+    }
+  }
 
   return (
     <CContainer>
