@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -13,8 +13,30 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
 
 const JobDataForm = () => {
+  const [codigo, setCodigo] = useState(null)
+  const [descricao, setDescricao] = useState(null)
+  const [cbo, setCbo] = useState(false)
+
+  const handleBack = () => {
+    window.location.href = '#/tabelas/cargo'
+  }
+
+  const handleSubmit = async () => {
+    const data = {
+      descricao: descricao,
+      cbo: cbo,
+    }
+
+    const result = await api.post('/cargo', data)
+
+    if (result.status === 201) {
+      handleBack()
+    }
+  }
+
   return (
     <CContainer>
       <CRow>
@@ -24,24 +46,32 @@ const JobDataForm = () => {
               <CForm className="row">
                 <div className="mb-2 col-3">
                   <CFormLabel htmlFor="codigoInput">Código</CFormLabel>
-                  <CFormInput id="codigoInput" placeholder="Código" />
+                  <CFormInput id="codigoInput" placeholder="Código" disabled />
                 </div>
                 <div className="mb-2 col-9">
-                  <CFormLabel htmlFor="nomeInput">CBO</CFormLabel>
-                  <CFormInput id="nomeInput" placeholder="CBO" />
+                  <CFormLabel htmlFor="cboInput">CBO</CFormLabel>
+                  <CFormInput
+                    id="cboInput"
+                    placeholder="CBO"
+                    onChange={(e) => setCbo(e.target.value)}
+                  />
                 </div>
                 <div className="mb-2 col-12">
-                  <CFormLabel htmlFor="nomeSocialInput">Descrição</CFormLabel>
-                  <CFormInput id="nomeSocialInput" placeholder="Descrição" />
+                  <CFormLabel htmlFor="descricaoInput">Descrição</CFormLabel>
+                  <CFormInput
+                    id="descricaoInput"
+                    placeholder="Descrição"
+                    onChange={(e) => setDescricao(e.target.value)}
+                  />
                 </div>
               </CForm>
             </CCardBody>
             <CCardFooter>
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <CButton color="success" className="me-md-2">
+                <CButton color="success" className="me-md-2" onClick={handleSubmit}>
                   Salvar <CIcon icon={cilPlus} />
                 </CButton>
-                <CButton color="dark" className="me-md-2">
+                <CButton color="dark" className="me-md-2" onClick={handleBack}>
                   Voltar <CIcon icon={cilPlus} />
                 </CButton>
               </div>

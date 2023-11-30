@@ -18,6 +18,10 @@ import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
 
 const JobData = () => {
+  const created = () => {
+    window.location.href = '#/tabelas/cargo/create'
+  }
+
   return (
     <CContainer>
       <CRow>
@@ -25,7 +29,7 @@ const JobData = () => {
           <CCard className="p-1">
             <CCardHeader>
               <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <CButton color="success" className="me-md-2">
+                <CButton color="success" className="me-md-2" onClick={created}>
                   Adicionar <CIcon icon={cilPlus} />
                 </CButton>
               </div>
