@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   CButton,
   CCard,
@@ -16,10 +16,30 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
+import JobDataTable from './JobDataTable'
 
 const JobData = () => {
+  const [listData, setListData] = useState([])
+
   const created = () => {
     window.location.href = '#/tabelas/cargo/create'
+  }
+
+  const handleGetList = async () => {
+    const list = await api.get('/cargo')
+
+    if (list.status === 200) {
+      setListData(list.data)
+    }
+  }
+
+  useEffect(() => {
+    handleGetList()
+  }, [])
+
+  if (listData.length === 0) {
+    return <></>
   }
 
   return (
@@ -45,15 +65,8 @@ const JobData = () => {
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>
-                      <button>E</button>
-                      <button>D</button>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {listData &&
+                    listData.map((item, index) => <JobDataTable key={index} data={item} />)}
                 </CTableBody>
               </CTable>
             </CCardBody>
