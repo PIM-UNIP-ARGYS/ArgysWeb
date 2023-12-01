@@ -21,11 +21,21 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install, build
-        run: |
-          npm install
-          npm run build --if-present
-      
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build
+        run: yarn build --if-present
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
@@ -38,13 +48,16 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
+      - name: Update and Install zip
+        run: apk update && apk add zip
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: node-app
-      
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
