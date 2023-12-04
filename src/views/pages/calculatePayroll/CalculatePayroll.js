@@ -18,11 +18,15 @@ import api from 'src/services/axios.service'
 const CalculatePayroll = () => {
   const [referencia, setReferencia] = useState()
 
+  const handleBack = () => {
+    window.location.href = '#/processos/historico_fp'
+  }
+
   const handleSubmit = async () => {
-    const result = api.get(`/folha_pagamento?referencia=${referencia}`)
+    const result = await api.get(`/folha_pagamento?referencia=${referencia}`)
 
     if (result.status === 200) {
-      window.location.href = '#/processos/historico_fp'
+      handleBack()
     }
   }
   return (
