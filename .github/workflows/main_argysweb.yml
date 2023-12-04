@@ -41,9 +41,6 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      - name: Update and Install zip
-        run: apk update && apk add zip
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
