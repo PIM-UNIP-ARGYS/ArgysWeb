@@ -1,57 +1,53 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-  CButton,
   CCard,
   CCardBody,
-  CCardHeader,
   CCol,
   CContainer,
   CRow,
   CTable,
   CTableBody,
-  CTableDataCell,
   CTableHead,
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilPlus } from '@coreui/icons'
+import api from 'src/services/axios.service'
+import HistoryPayrollTable from './HistoryPayrollTable'
 
 const HistoryPayroll = () => {
+  const [listData, setListData] = useState([])
+
+  const handleGetList = async () => {
+    const list = await api.get('/folha_pagamento/historico')
+
+    if (list.status === 200) {
+      setListData(list.data)
+    }
+  }
+
+  useEffect(() => {
+    handleGetList()
+  }, [])
+
+  if (listData.length === 0) {
+    return <></>
+  }
   return (
     <CContainer>
       <CRow>
         <CCol md="12">
           <CCard className="p-1">
-            <CCardHeader>
-              <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                <CButton color="success" className="me-md-2">
-                  Adicionar <CIcon icon={cilPlus} />
-                </CButton>
-              </div>
-            </CCardHeader>
             <CCardBody>
               <CTable responsive bordered>
                 <CTableHead>
                   <CTableRow>
-                    <CTableHeaderCell scope="col">Referência</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Dia Inicial</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Dia Final</CTableHeaderCell>
-                    <CTableHeaderCell scope="col">Data de Execução do cálculo</CTableHeaderCell>
+                    <CTableHeaderCell scope="col">Nome do Arquivo</CTableHeaderCell>
                     <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
-                  <CTableRow>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>Cell</CTableDataCell>
-                    <CTableDataCell>
-                      <button>E</button>
-                      <button>D</button>
-                    </CTableDataCell>
-                  </CTableRow>
+                  {listData &&
+                    listData.map((item, index) => <HistoryPayrollTable key={index} data={item} />)}
                 </CTableBody>
               </CTable>
             </CCardBody>
