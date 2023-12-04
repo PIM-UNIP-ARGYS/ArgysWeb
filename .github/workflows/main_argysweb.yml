@@ -21,7 +21,12 @@ jobs:
         with:
           node-version: '16.x'
 
+      - name: Check if node_modules cache is available
+        id: check-cache
+        run: echo "::set-output name=cache-hit::$(test -d node_modules && echo true || echo false)"
+
       - name: Cache node_modules
+        if: steps.check-cache.outputs.cache-hit == 'false'
         uses: actions/cache@v2
         with:
           path: |
