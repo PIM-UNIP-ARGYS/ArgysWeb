@@ -41,19 +41,16 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: Update
+        run: apk update
+
+      - name: Install zip
+        run: apk add zip
+        
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: node-app
-
-      - name: Add Node.js start script to package.json
-        run: |
-          cat << EOF >> package.json
-          ,
-          "scripts": {
-            "start": "node app.js"
-          }
-          EOF
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
